@@ -1,0 +1,8 @@
+start()
+	var a
+	'Indique um numero: '!
+	if a? == 1 then
+		a-3!!
+	endif
+	start:=0
+end

@@ -1,0 +1,8 @@
+start()
+  if 5 > 1 then
+    'aaaaaaaaaaaaaa' !!
+  endif
+  'bbbbbbbbbbbbbbb' !!
+  start := 0
+end
+
