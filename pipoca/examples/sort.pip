@@ -1,0 +1,51 @@
+start()
+	var n, list[], temp[], i, i2
+	[temp] = 4
+	i := 0
+	while n? <> -1 do
+		i2 := 0
+		temp[i] := n
+		[list] = 4*(i+1)
+		while i2 < (i + 1) do
+			list[i2] := temp[i2]
+			i2++
+		done
+		i++
+		[temp] = 4*(i+1)
+		i2 := 0
+		while i2 < i do
+			temp[i2] := list[i2]
+			i2++
+		done
+	done
+	'Numbers sorted:' + quicksort(list) !!
+	start := 0
+end
+
+quicksort(list, min, max)
+	var t, pivot, i, j
+	pivot := list[min]
+	i := min
+	j := max + 1
+	if min < max then
+		#partition
+		while 1 do
+			do
+				i++
+			until (list[i] <= pivot) and (i <= max) done
+			do
+				j--
+			until (list[j] > pivot) done
+			if i >= j then
+				break 1
+			endif
+			t := list[i]
+			list[i] := list[j]
+			list[j] := t
+		done
+		#end partition
+		list := quicksort(list, min, j-min)
+		list := quicksort(list, j+min, max)
+	endif
+	quicksort := list
+end
