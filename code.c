@@ -1,5 +1,4 @@
 /* $Id: code.c,v 1.7 2004/12/09 17:25:13 prs Exp $ */
-/* FALTA ENTER com elses (OPTIONAL), !! comecar com ID q seja string, comecar no start? */
 #include <stdio.h>
 #include <stdlib.h>
 #include "lib/node.h"
@@ -224,7 +223,7 @@ static void eval(Node *p) {
 		case INT:
 			fprintf(out, pfINT, p->value.i);		/* push an integer	      */
 			break;
-		case STRING: /* not used? */
+		case STRING:
 			/* generate the string */
 			fprintf(out, pfRODATA);			/* strings are DATA readonly  */
 			fprintf(out, pfALIGN);			/* make sure we are aligned   */
@@ -240,10 +239,6 @@ static void eval(Node *p) {
 				sprintf(buf, "\t%s: is a constant value.", p->SUB(0)->SUB(0)->value.s);
         			yyerror(buf);
 			}else{
-				/*fprintf(out, pfCALL, "readi");
-	  			fprintf(out, pfPUSH);
-				eval(p->SUB(0));
-	  			fprintf(out, pfSTORE);*/
 	  			fprintf(out, pfINT, READLN_BUF);		/* put buffer size */
 	  			fprintf(out, pfADDR, "_READLN_BUF");		/* put buffer address */
 	  			fprintf(out, pfCALL, "readln");			/* readln */
@@ -354,9 +349,6 @@ static void eval(Node *p) {
 			fprintf(out, pfSUB);				/* subtract to the number of times printed */
 			fprintf(out, pfJMP, mklbl(lbl2));		/* print string again if not printed x times yet */
 			fprintf(out, pfLABEL, mklbl(lbl3));		/* make label to start print n times */
-       			break;
-       		case PRINTM:
-       			/* equal to '*' ?, remove when finished */
        			break;
        		case PRINTSM:
        			eval(p->SUB(1));
